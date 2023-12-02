@@ -25,7 +25,7 @@ Pentru a inițializa baza de date și a crea tabelele necesare, rulați scriptul
 php migrate.php
 ```
 
-## Migrare Bază de Date
+## Configurare MySQL
 
 - $servername = "localhost";
 - $port = "8081";
