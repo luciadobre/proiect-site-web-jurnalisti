@@ -16,3 +16,19 @@ Să se creeze un site care gestionează n jurnaliști care au un cont din care �
 - Proces de validare editorială și aprobare pentru încărcarea articolelor.
 - Prezentarea detaliilor articolului, inclusiv titlu, autor și dată.
 - Înregistrare utilizator și creare cont pentru cititori.
+
+## Migrare Bază de Date
+
+Pentru a inițializa baza de date și a crea tabelele necesare, rulați scriptul `migrate.php`. Asigurați-vă că aveți PHP și MySQL instalate local.
+
+```bash
+php migrate.php
+```
+
+## Migrare Bază de Date
+
+- $servername = "localhost";
+- $port = "8081";
+- $username = "root";
+- $password = "root";
+- $database = "articole";
