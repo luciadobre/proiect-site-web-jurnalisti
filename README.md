@@ -1,5 +1,5 @@
-# Proiect: Proiectarea și Realizarea Site-urilor Web
-
+# Proiect: Proiectarea și Realizarea Site-urilor Web - PHP
+Proiectul 1 - tehnica OOP
 ## Studenți
 - Roxana Chiriac
 - Lucia-Corina Dobre
