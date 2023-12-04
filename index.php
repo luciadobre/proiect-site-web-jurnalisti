@@ -34,7 +34,7 @@ if ($result && $result->num_rows > 0) {
 <?php elseif ($userRole === 'cititor'): ?>
     <button onclick="readArticles()">Citeste Articol</button>
 <?php else: ?>
-    <p>rol necunoscit</p>
+    <p>rol necunoscut</p>
 <?php endif; ?>
 
 <script>
