@@ -3,7 +3,7 @@ Proiectul 1 - tehnica OOP
 ## Studenți
 - Roxana Chiriac
 - Lucia-Corina Dobre
-- Karina [Nume de familie]
+- Anita-Karina Munteanu
 
 ## Descriere Proiect
 
@@ -32,13 +32,3 @@ php migrate.php
 - $username = "root";
 - $password = "root";
 - $database = "articole";
-
----------------
-## TODO
-
-- pagina de articole cu teme/categorii - casute care incadreaza UN PREVIEW al articolului ORGANIZATE PE CATEGORII (artistic, technic, science, moda) si in functie de rol apar butoane
-- click pe casuta -> vezi postarea
-- pagini CREATE(buton+pagina) EDIT(buton+pagina) DELETE(buton) - jurnalist
-- buton VALIDATE - editor - le face vizibile pt cititor (ele vor fi vizibile oricum pentru jurnalist+editor)
-
-- OPTIONAL: daca esti guest nu poti vedea articole -  daca dai click pe articol te trimite la login
