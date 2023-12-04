@@ -37,9 +37,15 @@ php migrate.php
 ---------------
 ## TODO
 
+- buton de login pe prima pagina
 - pagina de articole cu teme/categorii - casute care incadreaza UN PREVIEW al articolului ORGANIZATE PE CATEGORII (artistic, technic, science, moda) si in functie de rol apar butoane
 - click pe casuta -> vezi postarea
-- pagini CREATE(buton+pagina) EDIT(buton+pagina) DELETE(buton) - jurnalist
+- butonul de create apare doar daca esti jurnalist
+- pagini CREATE(buton) EDIT(buton+pagina) DELETE(buton) - jurnalist
 - buton VALIDATE - editor - le face vizibile pt cititor (ele vor fi vizibile oricum pentru jurnalist+editor)
 
 - OPTIONAL: daca esti guest nu poti vedea articole -  daca dai click pe articol te trimite la login
+
+Roxana - buton CREATE + pagina create (FORMULAR) + update in baza de date la post
+Lucia - thumbnail post + pagina de post
+Karina - fltru de categorii
