@@ -3,7 +3,7 @@ Proiectul 1 - tehnica OOP
 ## Studenți
 - Roxana Chiriac
 - Lucia-Corina Dobre
-- Karina [Nume de familie]
+- Anita-Karina Munteanu
 
 ## Descriere Proiect
 
