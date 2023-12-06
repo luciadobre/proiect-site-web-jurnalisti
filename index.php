@@ -1,17 +1,12 @@
 <?php
+session_start();
 include('connection.php');
 
-//get role from query parameter
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';
 
-$sql = "SELECT * FROM utilizatori WHERE rol = '$userRole'";
+$sql = "SELECT * FROM articole WHERE categorie IN ('artistic', 'tehnic', 'stiinta')";
 $result = $GLOBALS['conn']->query($sql);
-
-if ($result && $result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-} else {
-    $errorMessage = 'Invalid user role.';
-}
 ?>
 
 <!DOCTYPE html>
@@ -20,34 +15,37 @@ if ($result && $result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
+    <style>
+        .post-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Welcome, <?php echo isset($user['nume']) ? $user['nume'] : 'Guest'; ?>!</h1>
+<h1>Bine ai venit, <?php echo isset($user['nume']) ? $user['nume'] : 'Guest'; ?>!</h1>
 
-<?php if ($userRole === 'jurnalist'): ?>
-    <button onclick="writeArticle()">Scrie Articol</button>
-    <button onclick="readArticles()">Citeste Articol</button>
-<?php elseif ($userRole === 'editor'): ?>
-    <button onclick="validateArticle()">Valideaza Articol</button>
-    <button onclick="readArticles()">Citeste Articol</button>
-<?php elseif ($userRole === 'cititor'): ?>
-    <button onclick="readArticles()">Citeste Articol</button>
-<?php else: ?>
-    <p>rol necunoscut</p>
+<?php if ($userRole === 'jurnalist' || $userRole === 'editor'): ?>
+    <button onclick="createArticle()">Creare articol</button>
 <?php endif; ?>
 
+<?php while ($row = $result->fetch_assoc()): ?>
+    <div class="post-card" onclick="viewPost(<?php echo $row['id']; ?>)">
+        <h3><?php echo $row['titlu']; ?></h3>
+        <p>Author: <?php echo $row['autor']; ?></p>
+        <p><?php echo substr($row['continut'], 0, 50) . '...'; ?></p>
+    </div>
+<?php endwhile; ?>
+
 <script>
-    function writeArticle() {
-        alert('Scrie articol!');
+    function createArticle() {
+        window.location.href = 'create_post.php';
     }
-
-    function validateArticle() {
-        alert('Valideaza articol!');
-    }
-
-    function readArticles() {
-        alert('Citeste articol!');
+    function viewPost(postId) {
+        window.location.href = 'view_post.php?id=' + postId;
     }
 </script>
 
