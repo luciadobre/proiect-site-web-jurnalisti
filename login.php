@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('connection.php');
 
 $username = '';
@@ -9,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //validation
+    // validation
     if (empty($username) || empty($password)) {
         $errorMessage = 'Please enter both username and password.';
     } else {
@@ -17,10 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "SELECT * FROM utilizatori WHERE user = '$username' AND parola = '$password'";
         $result = $GLOBALS['conn']->query($sql);
 
-        //check if successful
+        // check if successful
         if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
             $userRole = $user['rol']; // get the user's role
+
+            // store user information in session
+            $_SESSION['user'] = $user;
 
             // redirect to index.php with user role as query
             header("Location: index.php?role=$userRole");
