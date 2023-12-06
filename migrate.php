@@ -24,12 +24,12 @@ $conn->close();
 
 $conn = new mysqli($servername, $username, $password, $database);
 
-// verificare conexiune
+// verify connection
 if ($conn->connect_error) {
     die("Conexiune esuata: " . $conn->connect_error);
 }
 
-// crearea bazei de date cu tabel
+// db with table
 $sql = "
     DROP TABLE IF EXISTS utilizatori;
     DROP TABLE IF EXISTS articole;
