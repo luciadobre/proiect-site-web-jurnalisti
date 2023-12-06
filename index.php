@@ -3,6 +3,10 @@ session_start();
 include('connection.php');
 
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$userRole = isset($_GET['role']) ? $_GET['role'] : '';
+
+$sql = "SELECT * FROM articole WHERE categorie IN ('artistic', 'tehnic', 'stiinta')";
+
 
 // Verifică dacă formularul de filtrare a fost trimis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter_category'])) {
@@ -13,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter_category'])) {
     // Afișarea tuturor articolelor by default
     $sql = "SELECT * FROM articole";
 }
-
 $result = $GLOBALS['conn']->query($sql);
 ?>
 
@@ -48,6 +51,9 @@ $result = $GLOBALS['conn']->query($sql);
     <button type="submit">Filtrează</button>
 </form>
 
+<?php if ($userRole === 'jurnalist' || $userRole === 'editor'): ?>
+    <button onclick="createArticle()">Creare articol</button>
+<?php endif; ?>
 
 <?php while ($row = $result->fetch_assoc()): ?>
     <div class="post-card" onclick="viewPost(<?php echo $row['id']; ?>)">
@@ -58,6 +64,9 @@ $result = $GLOBALS['conn']->query($sql);
 <?php endwhile; ?>
 
 <script>
+    function createArticle() {
+        window.location.href = 'create_post.php';
+    }
     function viewPost(postId) {
         window.location.href = 'view_post.php?id=' + postId;
     }
