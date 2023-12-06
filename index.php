@@ -5,8 +5,7 @@ include('connection.php');
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';
 
-$sql = "SELECT * FROM articole WHERE categorie IN ('artistic', 'tehnic', 'stiinta')";
-
+// $sql = "SELECT * FROM articole";
 
 // Verifică dacă formularul de filtrare a fost trimis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter_category'])) {
