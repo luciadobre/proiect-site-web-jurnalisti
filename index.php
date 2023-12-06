@@ -40,10 +40,10 @@ $result = $GLOBALS['conn']->query($sql);
 <form method="post" action="">
     <label for="filter_category">Filtrează după categorie:</label>
     <select id="filter_category" name="filter_category">
-        <option value="artistic" selected>Artistic</option>
+        <option value="artistic">Artistic</option>
         <option value="tehnic">Tehnic</option>
         <option value="stiinta">Științific</option>
-        <option value="fashion">Modă</option>
+        <option value="moda">Modă</option>
     </select>
     <button type="submit">Filtrează</button>
 </form>
