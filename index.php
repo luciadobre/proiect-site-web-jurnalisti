@@ -27,7 +27,7 @@ $result = $post->getAllPosts();
 </head>
 <body>
 
-<h1>Bine ai venit, <?php echo isset($user['nume']) ? $user['nume'] : 'Guest'; ?>!</h1>
+<h1>Bine ai venit, <?php echo isset($user['nume']) ? $user['nume'] : 'Vizitator'; ?>!</h1>
 
 <?php if ($userRole === 'jurnalist' || $userRole === 'editor'): ?>
     <button onclick="createArticle()">Creare articol</button>
