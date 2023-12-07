@@ -37,6 +37,8 @@ $categories = $post->getAllCategories();
     <button onclick="filterByCategory('<?php echo $category; ?>')"><?php echo $category; ?></button>
 <?php endforeach; ?>
 
+<button onclick="resetFilters()">Resetare filtre</button>
+
 <div id="posts-container">
     <?php $allPosts = $post->getAllPosts(); ?>
     <?php while ($row = $allPosts->fetch_assoc()): ?>
@@ -65,7 +67,7 @@ $categories = $post->getAllCategories();
             .then(data => {
                 const postsContainer = document.getElementById('posts-container');
                 if (data.trim() === '') {
-                    postsContainer.innerHTML = '<p>No posts found for this category.</p>';
+                    postsContainer.innerHTML = '<p>Nu am gasit articole in aceasta categorie</p>';
                 } else {
                     postsContainer.innerHTML = data;
                 }
@@ -73,7 +75,21 @@ $categories = $post->getAllCategories();
             .catch(error => {
                 console.error('Error fetching posts:', error);
                 const postsContainer = document.getElementById('posts-container');
-                postsContainer.innerHTML = '<p>Error fetching posts. Please try again later.</p>';
+                postsContainer.innerHTML = '<p>Nu am gasit articole</p>';
+            });
+    }
+
+    function resetFilters() {
+        fetch('filter_posts.php')
+            .then(response => response.text())
+            .then(data => {
+                const postsContainer = document.getElementById('posts-container');
+                postsContainer.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error fetching posts:', error);
+                const postsContainer = document.getElementById('posts-container');
+                postsContainer.innerHTML = '<p>Nu am gasit articole</p>';
             });
     }
 </script>

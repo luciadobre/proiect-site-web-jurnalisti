@@ -48,6 +48,7 @@ $sql = "
         autor VARCHAR(255) NOT NULL,
         continut TEXT NOT NULL,
         categorie VARCHAR(50) NOT NULL,
+        validat TINYINT(1) NOT NULL DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     
