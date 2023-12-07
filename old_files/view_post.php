@@ -1,11 +1,6 @@
 <?php
 session_start();
 include('connection.php');
-include('User.php');
-include('Post.php');
-
-$user = new User(Database::getConnection());
-$post = new Post(Database::getConnection());
 
 $postId = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -15,17 +10,24 @@ if (empty($postId)) {
     exit();
 }
 
-$postDetails = $post->getPostById($postId);
+$sql = "SELECT * FROM articole WHERE id = $postId";
+$result = $GLOBALS['conn']->query($sql);
 
-if (empty($postDetails)) {
+if ($result && $result->num_rows > 0) {
+    $post = $result->fetch_assoc();
+    //Check if the 'rol' key exists in the '$_SESSION['user']' array
+    if (isset($_SESSION['user']['rol'])) {
+        $userRole = $_SESSION['user']['rol'];
+    } else {
+        $userRole = '';
+    }
+} else {
     // If no post
     header("Location: index.php");
     exit();
 }
-
-//Check if the 'rol' key exists in the '$_SESSION['user']' array
-$userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,19 +46,19 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 </head>
 <body>
 
-<h1><?php echo $postDetails['titlu']; ?></h1>
-<p>Autor: <?php echo $postDetails['autor']; ?></p>
-<p><?php echo $postDetails['continut']; ?></p>
+<h1><?php echo $post['titlu']; ?></h1>
+<p>Autor: <?php echo $post['autor']; ?></p>
+<p><?php echo $post['continut']; ?></p>
 
 <div class="button-container">
     <?php
     if ($userRole === 'jurnalist') {
-        echo '<button onclick="editPost(' . $postDetails['id'] . ')">Editare</button>';
-        echo '<button onclick="deletePost(' . $postDetails['id'] . ')">Stergere</button>';
+        echo '<button onclick="editPost(' . $post['id'] . ')">Editare</button>';
+        echo '<button onclick="deletePost(' . $post['id'] . ')">Stergere</button>';
     } elseif ($userRole === 'editor') {
-        echo '<button onclick="editPost(' . $postDetails['id'] . ')">Editare</button>';
-        echo '<button onclick="deletePost(' . $postDetails['id'] . ')">Stergere</button>';
-        echo '<button onclick="validatePost(' . $postDetails['id'] . ')">Validare</button>';
+        echo '<button onclick="editPost(' . $post['id'] . ')">Editare</button>';
+        echo '<button onclick="deletePost(' . $post['id'] . ')">Stergere</button>';
+        echo '<button onclick="validatePost(' . $post['id'] . ')">Validare</button>';
     }
     ?>
 </div>
@@ -80,4 +82,3 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 
 </body>
 </html>
-

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('connection.php');
 
 $articleId = isset($_GET['id']) ? $_GET['id'] : null;

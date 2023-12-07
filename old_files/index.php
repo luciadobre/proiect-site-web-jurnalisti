@@ -1,13 +1,12 @@
 <?php
 session_start();
 include('connection.php');
-include('Post.php');
 
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';
 
-$post = new Post(Database::getConnection());
-$result = $post->getAllPosts();
+$sql = "SELECT * FROM articole";
+$result = $GLOBALS['conn']->query($sql);
 ?>
 
 <!DOCTYPE html>

@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category = isset($_POST['category']) ? $_POST['category'] : '';
 
     $sql = "INSERT INTO articole (titlu, autor, continut, categorie) VALUES ('$title', '$author', '$content', '$category')";
-    if (Database::getConnection()->query($sql) === TRUE) {
-        echo "Articol nou creat";
+    if ($GLOBALS['conn']->query($sql) === TRUE) {
+        echo "New post created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . Database::getConnection()->error;
+        echo "Error: " . $sql . "<br>" . $GLOBALS['conn']->error;
     }
 }
 ?>
@@ -28,23 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h1>Creare articol nou</h1>
 
 <form method="post" action="create_post.php">
-    <label for="title">Titlu:</label>
+    <label for="title">Title:</label>
     <input type="text" id="title" name="title" required>
     <br>
 
-    <label for="author">Autor:</label>
+    <label for="author">Author:</label>
     <input type="text" id="author" name="author" required>
     <br>
 
-    <label for="content">Continut:</label>
+    <label for="content">Content:</label>
     <textarea id="content" name="content" rows="4" required></textarea>
     <br>
 
-    <label for="category">Categorie:</label>
+    <label for="category">Category:</label>
     <input type="text" id="category" name="category" required>
     <br>
 
-    <button type="submit">Creare articol</button>
+    <button type="submit">Create Post</button>
 </form>
 
 </body>
