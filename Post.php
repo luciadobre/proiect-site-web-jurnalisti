@@ -19,5 +19,24 @@ class Post {
 
         return $result->fetch_assoc();
     }
+
+    public function getAllCategories() {
+        $sql = "SELECT DISTINCT categorie FROM articole";
+        $result = $this->conn->query($sql);
+
+        $categories = [];
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['categorie'];
+        }
+
+        return $categories;
+    }
+
+    public function getPostsByCategory($category) {
+        $sql = "SELECT * FROM articole WHERE categorie = '$category' AND validat = 1";
+        $result = $this->conn->query($sql);
+
+        return $result;
+    }
 }
 ?>
