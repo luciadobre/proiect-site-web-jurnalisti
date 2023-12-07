@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = isset($_POST['content']) ? $_POST['content'] : '';
     $category = isset($_POST['category']) ? $_POST['category'] : '';
 
-    $sql = "INSERT INTO articole (titlu, autor, continut, categorie) VALUES ('$title', '$author', '$content', '$category')";
+    $sql = "INSERT INTO articole (titlu, autor, continut, categorie, validat) VALUES ('$title', '$author', '$content', '$category', FALSE)";
     if (Database::getConnection()->query($sql) === TRUE) {
         echo "Articol nou creat";
     } else {

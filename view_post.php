@@ -74,13 +74,15 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
     }
 
     function deletePost(postId) {
-        alert('Stergere post cu ID ' + postId);
-        // Implement post deletion from the database
+        if (confirm('Sunteti sigur ca doriti sa stergeti acest articol?')) {
+            window.location.href = 'delete_post.php?id=' + postId;
+        }
     }
 
     function validatePost(postId) {
-        alert('Validare post cu ID ' + postId);
-        // Implement post validation logic
+        if (confirm('Validati acest articol?')) {
+            window.location.href = 'validate_post.php?id=' + postId;
+        }
     }
 </script>
 
