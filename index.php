@@ -7,7 +7,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';
 
 $post = new Post(Database::getConnection());
-$result = $post->getAllPosts();
+$allPosts = $post->getAllPosts();
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +33,14 @@ $result = $post->getAllPosts();
     <button onclick="createArticle()">Creare articol</button>
 <?php endif; ?>
 
-<?php while ($row = $result->fetch_assoc()): ?>
-    <div class="post-card" onclick="viewPost(<?php echo $row['id']; ?>)">
-        <h3><?php echo $row['titlu']; ?></h3>
-        <p>Autor: <?php echo $row['autor']; ?></p>
-        <p><?php echo substr($row['continut'], 0, 50) . '...'; ?></p>
-    </div>
+<?php while ($row = $allPosts->fetch_assoc()): ?>
+    <?php if ($row['validat'] == 1 || $userRole === 'jurnalist' || $userRole === 'editor'): ?>
+        <div class="post-card" onclick="viewPost(<?php echo $row['id']; ?>)">
+            <h3><?php echo $row['titlu']; ?></h3>
+            <p>Autor: <?php echo $row['autor']; ?></p>
+            <p><?php echo substr($row['continut'], 0, 50) . '...'; ?></p>
+        </div>
+    <?php endif; ?>
 <?php endwhile; ?>
 
 <script>

@@ -50,17 +50,15 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
     </style>
 </head>
 <body>
-
 <h1><?php echo $postDetails['titlu']; ?></h1>
 <p>Autor: <?php echo $postDetails['autor']; ?></p>
-<p><?php echo $postDetails['continut']; ?></p>
+<p>Continut: <?php echo $postDetails['continut']; ?></p>
+
+<p>Status validare: <?php echo $postDetails['validat'] ? 'Validat' : 'Nevalidat'; ?></p>
 
 <div class="button-container">
     <?php
-    if ($userRole === 'jurnalist') {
-        echo '<button onclick="editPost(' . $postDetails['id'] . ')">Editare</button>';
-        echo '<button onclick="deletePost(' . $postDetails['id'] . ')">Stergere</button>';
-    } elseif ($userRole === 'editor') {
+    if ($userRole === 'jurnalist' || $userRole === 'editor') {
         echo '<button onclick="editPost(' . $postDetails['id'] . ')">Editare</button>';
         echo '<button onclick="deletePost(' . $postDetails['id'] . ')">Stergere</button>';
         echo '<button onclick="validatePost(' . $postDetails['id'] . ')">Validare</button>';

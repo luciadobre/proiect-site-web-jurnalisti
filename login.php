@@ -8,7 +8,6 @@ $user = new User(Database::getConnection());
 $username = '';
 $password = '';
 $errorMessage = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['login'])) {
         $username = $_POST['username'];
@@ -17,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // validation
         if (empty($username) || empty($password)) {
             $errorMessage = 'Introduceti username si parola.';
-            // early return if validation fails
-            return;
+            // Redirect to the login page
+            echo "<script>window.location.href = 'login.php';</script>";
+            exit();
         }
 
         // authentication
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 }
+
 ?>
 
 <!DOCTYPE html>
