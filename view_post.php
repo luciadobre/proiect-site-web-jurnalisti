@@ -15,6 +15,12 @@ if (empty($postId)) {
     exit();
 }
 
+// If no user is logged in, redirect to login.php
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $postDetails = $post->getPostById($postId);
 
 if (empty($postDetails)) {
@@ -23,9 +29,10 @@ if (empty($postDetails)) {
     exit();
 }
 
-//Check if the 'rol' key exists in the '$_SESSION['user']' array
+// Check if the 'rol' key exists in the '$_SESSION['user']' array
 $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,4 +87,3 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 
 </body>
 </html>
-

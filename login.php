@@ -17,27 +17,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // validation
         if (empty($username) || empty($password)) {
             $errorMessage = 'Introduceti username si parola.';
+            // early return if validation fails
+            return;
+        }
+
+        // authentication
+        $result = $user->login($username, $password);
+
+        // check if successful
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $userRole = $user['rol']; // get the user's role
+
+            // store user information in session
+            $_SESSION['user'] = $user;
+
+            // redirect based on user role
+            $redirectPage = in_array($userRole, ['editor', 'jurnalist', 'cititor']) ? "index.php?role=$userRole" : "login.php";
+            echo "<script>window.location.href = '$redirectPage';</script>";
+            exit();
         } else {
-            // authentication
-            $result = $user->login($username, $password);
-
-            // check if successful
-            if ($result && $result->num_rows > 0) {
-                $user = $result->fetch_assoc();
-                $userRole = $user['rol']; // get the user's role
-
-                // store user information in session
-                $_SESSION['user'] = $user;
-
-                // redirect to index.php with user role as query
-                header("Location: index.php?role=$userRole");
-                exit();
-            } else {
-                $errorMessage = 'Username si parola nu sunt valide.';
-            }
+            $errorMessage = 'Username si parola nu sunt valide.';
         }
     } elseif (isset($_POST['register'])) {
-        header("Location: register.php");
+        echo "<script>window.location.href = 'register.php';</script>";
         exit();
     }
 }
@@ -66,21 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" name="login">Login</button>
 </form>
 
-<button type="button" onclick="redirectToRegister()">Inregistrare</button>
+<button type="button" onclick="window.location.href = 'register.php'">Inregistrare</button>
 
-<button type="button" onclick="viewAsGuest()">Vizualizare ca vizitator</button>
+<button type="button" onclick="window.location.href = 'index.php'">Vizualizare ca vizitator</button>
 
 <p style="color: red;"><?php echo $errorMessage; ?></p>
-
-<script>
-    function redirectToRegister() {
-        window.location.href = 'register.php';
-    }
-
-    function viewAsGuest() {
-        window.location.href = 'index.php';
-    }
-</script>
 
 </body>
 </html>
