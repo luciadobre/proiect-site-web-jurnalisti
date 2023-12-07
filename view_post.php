@@ -70,8 +70,7 @@ $userRole = isset($_SESSION['user']['rol']) ? $_SESSION['user']['rol'] : '';
 
 <script>
     function editPost(postId) {
-        alert('Editare post cu ID ' + postId);
-        // Implement redirection to the post editing page
+        window.location.href = 'edit_post.php?id=' + postId;
     }
 
     function deletePost(postId) {
