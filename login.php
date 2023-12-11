@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style_login.css">
     <title>Login</title>
 </head>
 <body>
-
 <h1>Login</h1>
 
 <form method="post" action="login.php" id="loginForm">
@@ -70,9 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" name="login">Login</button>
 </form>
 
-<button type="button" onclick="window.location.href = 'register.php'">Inregistrare</button>
-
-<button type="button" onclick="window.location.href = 'index.php'">Vizualizare ca vizitator</button>
+<div class="button-container">
+    <button type="button" onclick="window.location.href = 'register.php'">Inregistrare</button>
+    <button type="button" onclick="window.location.href = 'index.php'">Vizualizare ca vizitator</button>
+</div>
 
 <p style="color: red;"><?php echo $errorMessage; ?></p>
 
