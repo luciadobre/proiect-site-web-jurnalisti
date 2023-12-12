@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('Database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = isset($_POST['title']) ? $_POST['title'] : '';

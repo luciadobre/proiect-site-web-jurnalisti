@@ -2,6 +2,7 @@
 class Post {
     private $conn;
 
+    // constructor for connection parameter
     public function __construct($conn) {
         $this->conn = $conn;
     }

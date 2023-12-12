@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('connection.php');
+include('Database.php');
 include('User.php');
 
 $user = new User(Database::getConnection());

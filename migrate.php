@@ -1,10 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "articole";
+require_once 'Database.php';
 
-$conn = new mysqli($servername, $username, $password);
+// function from database
+$conn = Database::getConnection();
 
 // check connection
 if ($conn->connect_error) {
@@ -12,20 +10,12 @@ if ($conn->connect_error) {
 }
 
 // create db
+$database = "articole";
 $sql = "CREATE DATABASE IF NOT EXISTS $database";
 if ($conn->query($sql) === TRUE) {
     echo "Baza de date a fost creata\n";
 } else {
     echo "Eroare baza de date: " . $conn->error . "\n";
-}
-
-$conn->close();
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-// verify connection
-if ($conn->connect_error) {
-    die("Conexiune esuata: " . $conn->connect_error);
 }
 
 // db with table
@@ -69,5 +59,6 @@ if ($conn->multi_query($sql) === TRUE) {
     echo "eroare la crearea tabelelor si datelor: " . $conn->error . "\n";
 }
 
-$conn->close();
+// close the connection
+Database::closeConnection();
 ?>

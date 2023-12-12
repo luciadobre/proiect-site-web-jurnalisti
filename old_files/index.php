@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('connection.php');
+include('Database.php');
 
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';

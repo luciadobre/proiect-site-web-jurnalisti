@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('Database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $postId = isset($_GET['id']) ? $_GET['id'] : '';

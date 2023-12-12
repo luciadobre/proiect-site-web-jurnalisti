@@ -1,13 +1,17 @@
 <?php
 session_start();
-include('connection.php');
+include('Database.php');
 include('Post.php');
 
+//user if logged in, null if not logged in
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+//role if specified in url, '' if not specified
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';
 
 $post = new Post(Database::getConnection());
 $categories = $post->getAllCategories();
+
+Database::closeConnection();
 ?>
 
 <!DOCTYPE html>

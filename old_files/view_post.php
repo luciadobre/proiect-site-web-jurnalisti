@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('connection.php');
+include('Database.php');
 
 $postId = isset($_GET['id']) ? $_GET['id'] : '';
 

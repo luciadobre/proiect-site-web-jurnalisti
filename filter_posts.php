@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('Database.php');
 include('Post.php');
 
 $post = new Post(Database::getConnection());
