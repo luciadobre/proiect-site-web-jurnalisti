@@ -3,7 +3,6 @@ Proiectul 1 - tehnica OOP
 ## Studenți
 - Roxana Chiriac
 - Lucia-Corina Dobre
-- Anita-Karina Munteanu
 
 ## Descriere Proiect
 
